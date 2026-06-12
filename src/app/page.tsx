@@ -1,7 +1,13 @@
+import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/hero/Hero";
+import Footer from "@/components/layout/Footer";
+
 export default function Home() {
   return (
     <main>
-      Thematic Byte
+      <Navbar />
+      <Hero />
+      <Footer />
     </main>
   );
 }
