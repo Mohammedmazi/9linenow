@@ -1,4 +1,5 @@
 import Container from "../shared/Container";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
@@ -6,9 +7,16 @@ export default function Navbar() {
       <Container>
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 font-bold text-white">
-              TB
-            </div>
+            <div className="flex h-15 w-15 items-center justify-center rounded-lg overflow-hidden">
+  <div className="relative h-10 w-10">
+  <Image
+    src="/logo.png"
+    alt="Thematic Byte"
+    fill
+    className="object-contain"
+  />
+</div>
+</div>
 
             <div>
               <h1 className="font-bold text-white">
@@ -21,17 +29,57 @@ export default function Navbar() {
             </div>
           </div>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm text-zinc-300">
-            <a href="#">Home</a>
-            <a href="#">Services</a>
-            <a href="#">Solutions</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+            <a
+  href="#"
+  className="transition hover:text-white"
+>
+  Home
+</a>
+
+<a
+  href="#"
+  className="transition hover:text-white"
+>
+Services
+</a>
+
+
+
+<a
+  href="#"
+  className="transition hover:text-white"
+>
+  Solutions
+           
+</a>
+
+
+<a
+  href="#"
+  className="transition hover:text-white"
+>
+  
+  About
+
+           
+</a>
+
+
+
+<a
+  href="#"
+  className="transition hover:text-white"
+>
+  Contact
+</a>
+
+
           </nav>
 
-          <button className="rounded-full bg-indigo-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-indigo-500">
-            Book Consultation
-          </button>
+         <button className="rounded-full bg-gradient-to-r from-[#1237d6] via-[#1b6cff] to-[#20d4ff] px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(32,212,255,0.35)]">
+  Book Consultation
+</button>
         </div>
       </Container>
     </header>
