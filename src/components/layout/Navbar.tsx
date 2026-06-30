@@ -39,7 +39,7 @@ export default function Navbar() {
   "
 >
   <Image
-    src="/logo2.png"
+    src="/logo3.png"
     alt="9LineNow"
     width={56}
     height={56}
