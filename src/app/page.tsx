@@ -6,15 +6,13 @@ import TechStrip from "@/components/technology/TechStrip";
 import Solutions from "@/components/solutions/Solution";
 import CTASection from "@/components/cta/CTASection";
 import Process from "@/components/process/Process";
-import FeaturedSolutions from "@/components/showcase/FeaturedSolutions";
 import AboutSection from "@/components/about/AboutSection";
 import WhyChooseUs from "@/components/about/WhyChooseUs";
 import FlagshipSolution from "@/components/showcase/FlagshipSolution";
 
-
 export default function Home() {
   return (
-    <main className="bg-[#0A0A0A]">
+    <main className="bg-(--background)">
       <Navbar />
       <Hero />
       <TechStrip />

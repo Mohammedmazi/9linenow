@@ -1,8 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function ContactForm() {
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(
@@ -10,87 +17,247 @@ export default function ContactForm() {
   ) {
     e.preventDefault();
 
+    if (loading) return;
+
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      body: JSON.stringify({
-        name: formData.get("name"),
-        email: formData.get("email"),
-        company: formData.get("company"),
-        phone: formData.get("phone"),
-        service: formData.get("service"),
-        project: formData.get("project"),
-      }),
-    });
+    const formData = new FormData(form);
 
-    setLoading(false);
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      company: formData.get("company"),
+      phone: formData.get("phone"),
+      service: formData.get("service"),
+      project: formData.get("project"),
+    };
 
-    if (response.ok) {
-      window.location.href = "/contact/success";
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Unable to submit request.");
+      }
+
+      form.reset();
+
+      router.replace("/contact/success");
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        "Unable to submit your request right now. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <form
+      noValidate
       onSubmit={handleSubmit}
-      className="space-y-6 rounded-3xl border border-white/10 bg-white/5 p-8"
+      className="
+        space-y-6
+        rounded-3xl
+        border
+        border-gray-200
+        bg-white
+        p-8
+        shadow-xl
+      "
     >
-      <input
-        name="name"
-        placeholder="Full Name"
-        required
-        className="w-full rounded-xl bg-black/40 p-4 text-white"
-      />
+      {/* Full Name */}
 
-      <input
-        name="email"
-        type="email"
-        placeholder="Email Address"
-        required
-        className="w-full rounded-xl bg-black/40 p-4 text-white"
-      />
+      <div className="space-y-2">
+        <label
+          htmlFor="name"
+          className="text-sm font-semibold text-gray-700"
+        >
+          Full Name *
+        </label>
 
-      <input
-        name="company"
-        placeholder="Company Name"
-        className="w-full rounded-xl bg-black/40 p-4 text-white"
-      />
+        <Input
+          id="name"
+          name="name"
+          required
+          autoComplete="name"
+          placeholder="John Smith"
+          disabled={loading}
+        />
+      </div>
 
-      <input
-        name="phone"
-        placeholder="Phone Number"
-        className="w-full rounded-xl bg-black/40 p-4 text-white"
-      />
+      {/* Email */}
 
-      <select
-        name="service"
-        className="w-full rounded-xl bg-black/40 p-4 text-white"
-      >
-        <option>Web Development</option>
-        <option>Mobile Applications</option>
-        <option>AI Solutions</option>
-        <option>Automation</option>
-        <option>Custom Software</option>
-      </select>
+      <div className="space-y-2">
+        <label
+          htmlFor="email"
+          className="text-sm font-semibold text-gray-700"
+        >
+          Email Address *
+        </label>
 
-      <textarea
-        name="project"
-        rows={6}
-        placeholder="Tell us about your project..."
-        required
-        className="w-full rounded-xl bg-black/40 p-4 text-white"
-      />
+        <Input
+          id="email"
+          type="email"
+          name="email"
+          required
+          autoComplete="email"
+          placeholder="john@example.com"
+          disabled={loading}
+        />
+      </div>
 
-      <button
+      {/* Company */}
+
+      <div className="space-y-2">
+        <label
+          htmlFor="company"
+          className="text-sm font-semibold text-gray-700"
+        >
+          Company
+        </label>
+
+        <Input
+          id="company"
+          name="company"
+          autoComplete="organization"
+          placeholder="Company Name"
+          disabled={loading}
+        />
+      </div>
+
+      {/* Phone */}
+
+      <div className="space-y-2">
+        <label
+          htmlFor="phone"
+          className="text-sm font-semibold text-gray-700"
+        >
+          Phone Number
+        </label>
+
+        <Input
+          id="phone"
+          type="tel"
+          name="phone"
+          autoComplete="tel"
+          placeholder="+91 98765 43210"
+          disabled={loading}
+        />
+      </div>
+
+      {/* Service */}
+
+      <div className="space-y-2">
+        <label
+          htmlFor="service"
+          className="text-sm font-semibold text-gray-700"
+        >
+          Service Required *
+        </label>
+
+        <select
+          id="service"
+          name="service"
+          required
+          disabled={loading}
+          className="
+            h-12
+            w-full
+            rounded-2xl
+            border
+            border-gray-200
+            bg-white
+            px-4
+
+            text-gray-900
+
+            shadow-sm
+
+            transition-all
+            duration-300
+
+            hover:border-emerald-300
+            hover:shadow-md
+
+            focus:border-emerald-500
+            focus:outline-none
+            focus:ring-4
+            focus:ring-emerald-100
+
+            disabled:bg-gray-100
+            disabled:text-gray-400
+          "
+        >
+          <option value="">
+            Select a service
+          </option>
+
+          <option value="Web Development">
+            Web Development
+          </option>
+
+          <option value="Mobile Applications">
+            Mobile Applications
+          </option>
+
+          <option value="AI Solutions">
+            AI Solutions
+          </option>
+
+          <option value="Automation">
+            Automation
+          </option>
+
+          <option value="Custom Software">
+            Custom Software
+          </option>
+        </select>
+      </div>
+
+      {/* Project */}
+
+      <div className="space-y-2">
+        <label
+          htmlFor="project"
+          className="text-sm font-semibold text-gray-700"
+        >
+          Project Details *
+        </label>
+
+        <Textarea
+          id="project"
+          name="project"
+          required
+          rows={6}
+          disabled={loading}
+          placeholder="Tell us about your project, goals, timeline, budget and requirements..."
+        />
+      </div>
+
+      {/* Submit */}
+
+      <Button
         type="submit"
+        size="lg"
         disabled={loading}
-        className="rounded-full bg-indigo-600 px-8 py-4 font-semibold text-white"
+        className="w-full"
       >
-        {loading ? "Sending..." : "Submit Request"}
-      </button>
+        {loading
+          ? "Sending Request..."
+          : "Submit Request"}
+      </Button>
     </form>
   );
 }

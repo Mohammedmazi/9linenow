@@ -4,86 +4,154 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur-md">
+    <header
+      className="
+        sticky
+        top-0
+        z-50
+        border-b
+        border-gray-200
+        bg-white/90
+        backdrop-blur-xl
+      "
+    >
       <Container>
         <div className="flex h-20 items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-15 w-15 items-center justify-center rounded-lg overflow-hidden">
-  <div className="relative h-10 w-10">
+
+          {/* Logo */}
+
+          <Link
+            href="/"
+            className="flex items-center gap-4"
+          >
+           <div
+  className="
+    flex
+    h-16
+    w-16
+    items-center
+    justify-center
+    rounded-2xl
+    border
+    border-gray-200
+    bg-white
+    shadow-sm
+  "
+>
   <Image
-    src="/logo.png"
-    alt="Thematic Byte"
-    fill
+    src="/logo1.png"
+    alt="9LineNow"
+    width={56}
+    height={56}
     className="object-contain"
+    priority
   />
 </div>
-</div>
-
             <div>
-              <h1 className="font-bold text-white">
-                Thematic Byte
+              <h1 className="text-xl font-bold tracking-tight text-gray-900">
+                9LineNow
               </h1>
 
-              <p className="text-xs text-zinc-400">
-                Software & AI Solutions
+              <p className="text-xs uppercase tracking-[0.25em] text-emerald-600">
+                Software • AI • Automation
               </p>
             </div>
-          </div>
+          </Link>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+          {/* Navigation */}
+
+          <nav className="hidden items-center gap-8 lg:flex">
+
             <a
-  href="#home"
-  className="transition hover:text-white"
->
-  Home
-</a>
+              href="#home"
+              className="
+                text-sm
+                font-medium
+                text-gray-600
+                transition
+                hover:text-emerald-600
+              "
+            >
+              Home
+            </a>
 
-<a
-  href="#services"
-  className="transition hover:text-white"
->
-Services
-</a>
+            <a
+              href="#services"
+              className="
+                text-sm
+                font-medium
+                text-gray-600
+                transition
+                hover:text-emerald-600
+              "
+            >
+              Services
+            </a>
 
+            <a
+              href="#solutions"
+              className="
+                text-sm
+                font-medium
+                text-gray-600
+                transition
+                hover:text-emerald-600
+              "
+            >
+              Solutions
+            </a>
 
+            <a
+              href="#about"
+              className="
+                text-sm
+                font-medium
+                text-gray-600
+                transition
+                hover:text-emerald-600
+              "
+            >
+              About
+            </a>
 
-<a
-  href="#solutions"
-  className="transition hover:text-white"
->
-  Solutions
-           
-</a>
-
-
-<a
-  href="#about"
-  className="transition hover:text-white"
->
-  
-  About
-
-           
-</a>
-
-
-
-<a
-  href="#contact"
-  className="transition hover:text-white"
->
-  Contact
-</a>
-
+            <a
+              href="#contact"
+              className="
+                text-sm
+                font-medium
+                text-gray-600
+                transition
+                hover:text-emerald-600
+              "
+            >
+              Contact
+            </a>
 
           </nav>
 
-    <Link
-  href="/contact"
-  className="rounded-full bg-indigo-600 px-5 py-2 text-white"
->
-  Book Consultation
-</Link>
+          {/* CTA */}
+
+          <Link
+            href="/contact"
+            className="
+              rounded-full
+              bg-emerald-600
+              px-6
+              py-3
+              text-sm
+              font-semibold
+              text-white
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+              hover:bg-emerald-700
+              hover:shadow-xl
+              hover:shadow-emerald-300
+            "
+          >
+            Book Consultation
+          </Link>
+
         </div>
       </Container>
     </header>
